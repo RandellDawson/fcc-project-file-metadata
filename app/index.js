@@ -1,8 +1,10 @@
-var express = require('express');
-var cors = require('cors');
-require('dotenv').config()
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-var app = express();
+dotenv.config();
+
+const app = express();
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -12,9 +14,7 @@ app.get('/', function (req, res) {
 });
 
 
-
-
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
-  console.log('Your app is listening on port ' + port)
+  console.log('App is listening on port ' + port)
 });
