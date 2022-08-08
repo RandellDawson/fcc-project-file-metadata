@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import multer from 'multer';
 
 dotenv.config();
@@ -18,8 +19,14 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res, next) => {
   const {
     originalname: name,
     mimetype: type,
-    size
+    size,
+    path
   } = req.file;
+  fs.unlink(path,(err => {
+    if (err)
+      console.log(err);
+    }
+  ));
   res.json({ name, type, size });
 });
 
